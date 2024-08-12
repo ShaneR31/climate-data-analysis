@@ -16,6 +16,7 @@ const Sidebar = () => (
         width: drawerWidth,
         boxSizing: 'border-box',
         top: 64, // Adjust based on the AppBar's height
+        boxShadow: 'none', // Remove the shadow
       },
     }}
   >

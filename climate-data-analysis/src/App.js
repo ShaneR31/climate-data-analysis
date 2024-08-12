@@ -1,28 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import { Box } from '@mui/material';
+import { Box, Container, CssBaseline } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const drawerWidth = 240;
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+    },
+  });
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Navbar />
-      <Sidebar />
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          marginLeft: `${drawerWidth}px`, // This ensures content doesn't hide behind the sidebar
-          paddingTop: '80px', // Adjust to ensure content doesn't overlap with Navbar
-        }}
-      >
-        <h1>Climate Data Analysis Tool</h1>
-        {/* Add other content here */}
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ display: 'flex' }}>
+        <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        <Sidebar />
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            marginLeft: `${drawerWidth}px`,
+            paddingTop: '80px',
+          }}
+        >
+          <h1>Climate Data Analysis Tool</h1>
+        </Box>
       </Box>
-    </Box>
+    </ThemeProvider>
   );
 }
 
