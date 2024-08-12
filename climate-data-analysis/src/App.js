@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import { Box, Container, CssBaseline } from '@mui/material';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const drawerWidth = 240;
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  // Detect the browser's preferred color scheme
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [darkMode, setDarkMode] = useState(prefersDarkMode);
+
+  useEffect(() => {
+    setDarkMode(prefersDarkMode);
+  }, [prefersDarkMode]);
 
   const theme = createTheme({
     palette: {
@@ -35,6 +43,7 @@ function App() {
           }}
         >
           <h1>Climate Data Analysis Tool</h1>
+          {/* Your main content here */}
         </Box>
       </Box>
     </ThemeProvider>
